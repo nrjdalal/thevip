@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 const index = () => {
   return (
     <div className="bg-raisenBlack h-screen w-screen">
