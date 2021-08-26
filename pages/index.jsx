@@ -48,7 +48,7 @@ const index = () => {
       </div>
 
       {/* notice */}
-      <div className="text-sky-300 max-w-screen-md mx-auto py-10 px-4">
+      {/* <div className="text-sky-300 max-w-screen-md mx-auto py-10 px-4">
         Sir furthur work requires constant interaction bw us. Please be
         available on Fiverr or contact us via information given below.
         <br />
@@ -60,7 +60,7 @@ const index = () => {
         <a href="https://wa.me/+91-9999373188" className="underline">
           WhatsApp
         </a>
-      </div>
+      </div> */}
     </div>
   )
 }
