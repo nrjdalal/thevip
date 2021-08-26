@@ -34,11 +34,15 @@ const index = () => {
       {/* section 03 */}
       <div className="max-w-screen-md mx-auto mt-10 flex flex-col md:flex-row items-center justify-between md:px-4">
         <div className="text-white text-center md:text-left">
-          <div className="text-gray-300">Countdown to pre-release</div>
-          <div className="mt-2">02 days | 11 hours | 23 minutes</div>
+          <div className="text-gray-300 font-medium">
+            Countdown to pre-release
+          </div>
+          <div className="mt-2 font-medium">
+            02 days | 11 hours | 23 minutes
+          </div>
         </div>
         {/* button */}
-        <div className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md">
+        <div className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md font-medium">
           Buy your ticket now €4.99
         </div>
       </div>
