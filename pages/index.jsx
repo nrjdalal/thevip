@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 const index = () => {
   return (
-    <div className="bg-raisenBlack h-screen w-screen">
+    <div className="bg-raisenBlack h-screen">
       {/* section 01 */}
       <div className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row md:px-4">
         {/* album art */}
@@ -48,7 +48,7 @@ const index = () => {
       </div>
 
       {/* notice */}
-      <div className="text-sky-300 max-w-screen-md mx-auto my-10 px-4">
+      <div className="text-sky-300 max-w-screen-md mx-auto py-10 px-4">
         Sir furthur work requires constant interaction bw us. Please be
         available on Fiverr or contact us via information given below.
         <br />
