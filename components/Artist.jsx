@@ -3,9 +3,9 @@
 export const PreRelease = (props) => {
   return (
     <>
-      <div className="bg-raisenBlack h-screen">
+      <div className="bg-raisenBlack py-10 md:py-40">
         {/* section 01 */}
-        <div className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row md:px-4">
+        <div className="max-w-screen-md mx-auto flex flex-col md:flex-row md:px-4">
           {/* cover */}
           <div className="md:w-1/2 md:order-2 md:ml-2">
             <div className="aspect-w-1 aspect-h-1">
@@ -37,7 +37,7 @@ export const PreRelease = (props) => {
         <div className="hidden md:block mx-auto max-w-[736px] h-[1px] bg-gray-300"></div>
 
         {/* section 03 */}
-        <div className="max-w-screen-md mx-auto mt-10 flex flex-col md:flex-row items-center justify-between md:px-4">
+        <div className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4">
           <div className="text-white text-center md:text-left">
             <div className="text-gray-300 font-medium">
               Countdown to pre-release
