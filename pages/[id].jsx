@@ -18,8 +18,6 @@ export async function getServerSideProps() {
 }
 
 const Home = ({ data }) => {
-  // console.log(data)
-
   const router = useRouter()
 
   for (let i = 0; i < data.length; i++) {
@@ -31,11 +29,19 @@ const Home = ({ data }) => {
     }
   }
 
+  if (typeof data.length !== 'undefined') {
+    return (
+      <>
+        <PreRelease />
+      </>
+    )
+  }
+
   const renderer = ({ days, hours, minutes }) => {
     return (
-      <span>
+      <>
         {days} days | {hours} hours | {minutes} minutes
-      </span>
+      </>
     )
   }
 
@@ -53,5 +59,3 @@ const Home = ({ data }) => {
 }
 
 export default Home
-
-// https://api.thevip.io/artists
