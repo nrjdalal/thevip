@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 
-import axios from 'axios'
 import { useRouter } from 'next/router'
 
 export const PreRelease = (props) => {
@@ -22,6 +21,7 @@ export const PreRelease = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
+        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
       },
       body: JSON.stringify(data),
     })
@@ -88,3 +88,5 @@ export const PreRelease = (props) => {
     </>
   )
 }
+
+// You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/.
