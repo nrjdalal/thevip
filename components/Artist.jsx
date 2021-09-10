@@ -14,10 +14,8 @@ export const PreRelease = (props) => {
     unit_amount_decimal: props.cost * 100,
   }
 
-  console.log(data)
-
   const handleSumbit = async () => {
-    const getId = await fetch('/api/checkout_sessions', {
+    const session = await fetch('/api/checkout_sessions', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
@@ -26,7 +24,7 @@ export const PreRelease = (props) => {
       body: JSON.stringify(data),
     })
 
-    const res = await getId.json()
+    const res = await session.json()
 
     router.push(res.url)
   }
