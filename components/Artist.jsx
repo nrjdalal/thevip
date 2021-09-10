@@ -6,12 +6,18 @@ export const PreRelease = (props) => {
   const router = useRouter()
 
   const data = {
-    currency: props.currency.toLowerCase(),
-    product_data: {
-      name: `${props.artist} - ${props.title}`,
-      images: [props.cover],
+    product: {
+      currency: props.data.currency.toLowerCase(),
+      product_data: {
+        name: `${props.artist} - ${props.title}`,
+        images: [props.cover],
+      },
+      unit_amount_decimal: props.data.price * 100,
     },
-    unit_amount_decimal: props.cost * 100,
+    router: {
+      success: '/thank-you',
+      fail: router.asPath,
+    },
   }
 
   const handleSumbit = async () => {
@@ -23,9 +29,7 @@ export const PreRelease = (props) => {
       },
       body: JSON.stringify(data),
     })
-
     const res = await session.json()
-
     router.push(res.url)
   }
 

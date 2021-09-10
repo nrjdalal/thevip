@@ -81,8 +81,7 @@ const Index = ({ data }) => {
         cover={cover}
         countdown={<Countdown date={pre_release.dateEnd} renderer={renderer} />}
         price={price}
-        currency={pre_release.currency}
-        cost={pre_release.price}
+        data={pre_release}
       />
     </>
   )
