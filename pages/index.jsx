@@ -12,11 +12,7 @@ export async function getServerSideProps() {
 const index = ({ data }) => {
   console.log(data)
 
-  return (
-    <>
-      <PreRelease />
-    </>
-  )
+  return <></>
 }
 
 export default index

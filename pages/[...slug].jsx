@@ -25,6 +25,14 @@ const Index = ({ data }) => {
   // getting artist data
   data = data[0]
 
+  if (!data) {
+    return (
+      <>
+        <div className="text-center text-white py-40">No such track</div>
+      </>
+    )
+  }
+
   if (typeof data === 'undefined') {
     return (
       <>
@@ -73,6 +81,8 @@ const Index = ({ data }) => {
         cover={cover}
         countdown={<Countdown date={pre_release.dateEnd} renderer={renderer} />}
         price={price}
+        currency={pre_release.currency}
+        cost={pre_release.price}
       />
     </>
   )

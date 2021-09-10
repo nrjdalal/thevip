@@ -3,22 +3,20 @@ const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // Create Checkout Sessions from body params.
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
-            // TODO: replace this with the `price` of the product you want to sell
-            price: '{{PRICE_ID}}',
+            price_data: req.body,
             quantity: 1,
           },
         ],
         payment_method_types: ['card'],
         mode: 'payment',
-        success_url: `${req.headers.origin}/?success=true&session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/?canceled=true`,
+        success_url: `${req.headers.origin}?success=true&session_id={CHECKOUT_SESSION_ID}`,
+        cancel_url: `${req.headers.origin}?canceled=true`,
       })
 
-      res.redirect(303, session.url)
+      res.status(200).json(session)
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message)
     }

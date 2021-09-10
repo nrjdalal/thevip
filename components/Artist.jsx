@@ -1,6 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
 
+import axios from 'axios'
+import { useRouter } from 'next/router'
+
 export const PreRelease = (props) => {
+  const router = useRouter()
+
+  const data = {
+    currency: props.currency.toLowerCase(),
+    product_data: {
+      name: `${props.artist} - ${props.title}`,
+      images: [props.cover],
+    },
+    unit_amount_decimal: props.cost * 100,
+  }
+
+  console.log(data)
+
+  const handleSumbit = async () => {
+    const getId = await fetch('/api/checkout_sessions', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(data),
+    })
+
+    const res = await getId.json()
+
+    router.push(res.url)
+  }
+
   return (
     <>
       <div className="bg-raisenBlack py-10 md:py-40">
@@ -47,7 +77,10 @@ export const PreRelease = (props) => {
             </div>
           </div>
           {/* button */}
-          <div className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md font-medium">
+          <div
+            onClick={handleSumbit}
+            className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md font-medium cursor-pointer"
+          >
             Buy your ticket now {props.price || '$0.00'}
           </div>
         </div>
