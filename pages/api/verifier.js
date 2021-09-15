@@ -20,6 +20,6 @@ export default async function handler(req, res) {
 
   res.redirect(
     303,
-    `https://thevip.vercel.app/preview/${req.query.slug}?token=${req.query.token} `
+    `${req.headers.origin}/preview/${req.query.slug}?token=${req.query.token} `
   )
 }

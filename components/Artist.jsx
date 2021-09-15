@@ -25,7 +25,6 @@ export const PreRelease = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer sk_test_51JVavjSC4OT4z30Krt6OZhqlgyki2trH8LA695PRqaLgKwyksQe95WQlvRLc5EjFkKDfbhF7yOrjh3kB7NRpzKFr00epgim2EK`,
       },
       body: JSON.stringify(data),
     })
