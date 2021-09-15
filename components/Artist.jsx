@@ -25,10 +25,11 @@ export const PreRelease = (props) => {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
+        Authorization: `Bearer sk_test_51JVavjSC4OT4z30Krt6OZhqlgyki2trH8LA695PRqaLgKwyksQe95WQlvRLc5EjFkKDfbhF7yOrjh3kB7NRpzKFr00epgim2EK`,
       },
       body: JSON.stringify(data),
     })
+
     const res = await session.json()
     router.push(res.url)
   }
