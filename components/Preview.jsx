@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
+import { Stream } from '@cloudflare/stream-react'
 
 export const Preview = (props) => {
   const [isStart, setStart] = useState(false)
@@ -7,6 +8,13 @@ export const Preview = (props) => {
   const toggleStart = () => {
     setStart(true)
   }
+
+  const logger = () => {
+    console.log('yay')
+  }
+
+  const videoIdOrSignedUrl =
+    'eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0In0.eyJzdWIiOiIyYjA4OTU3MTFjNTc3YTQ1NWM3Mjg2YWRjYzA0MGNiMyIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0IiwiZXhwIjoiMTYzMTUzNjIyMyIsIm5iZiI6IjE2MzE1MjkwMjMifQ.pPPHGnHpDKZXBb9-2h7qnEBsZ5IG_eS7xjA84p9lTNZb6ubJFtwjTb7k352oZ4VAOAJmsCDFTdnebAvaJ8o59BmDBrzwbB9P59BV-QQ4N8BPMdczpN5wgbitjDEWTC4J9lOOrqsA4wWkNoc6M5G-wpAXIX5vPvLp2OoFJ6kwB-aZ6fZisUeiUDMvvT8TbZT3sCrdM3Qx2uKnwBIPSOOTmI_N24c-bQ7eq_lrkaRQoA-7pwP3T5HcI68DkeaKoqRUrJNaUhIwo-hDAYZayQFU90Pm23yqxie7DM6dYk7wyu2vWPIKphABL46TFf1tLcI-sb4nJ-Hk0KAgoTIcscdMig'
 
   return (
     <>
@@ -25,7 +33,10 @@ export const Preview = (props) => {
                 alt=""
               />
             </div>
-            <div className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center w-full p-6 h-full justify-center">
+            <div
+              style={isStart ? { display: 'none' } : { display: 'flex' }}
+              className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full p-6 h-full justify-center"
+            >
               <div className="font-montserrat font-semibold mb-6 text-sm">
                 Please, read before pressing play
               </div>
@@ -47,12 +58,17 @@ export const Preview = (props) => {
               style={isStart ? { display: 'flex' } : { display: 'none' }}
               className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center"
             >
-              <iframe
-                src="https://iframe.videodelivery.net/eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0In0.eyJzdWIiOiIyYjA4OTU3MTFjNTc3YTQ1NWM3Mjg2YWRjYzA0MGNiMyIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0IiwiZXhwIjoiMTYzMTUzNjIyMyIsIm5iZiI6IjE2MzE1MjkwMjMifQ.pPPHGnHpDKZXBb9-2h7qnEBsZ5IG_eS7xjA84p9lTNZb6ubJFtwjTb7k352oZ4VAOAJmsCDFTdnebAvaJ8o59BmDBrzwbB9P59BV-QQ4N8BPMdczpN5wgbitjDEWTC4J9lOOrqsA4wWkNoc6M5G-wpAXIX5vPvLp2OoFJ6kwB-aZ6fZisUeiUDMvvT8TbZT3sCrdM3Qx2uKnwBIPSOOTmI_N24c-bQ7eq_lrkaRQoA-7pwP3T5HcI68DkeaKoqRUrJNaUhIwo-hDAYZayQFU90Pm23yqxie7DM6dYk7wyu2vWPIKphABL46TFf1tLcI-sb4nJ-Hk0KAgoTIcscdMig"
-                className="border-none w-full h-full"
-                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
-                allowFullScreen="true"
-              ></iframe>
+              {isStart ? (
+                <Stream
+                  src={videoIdOrSignedUrl}
+                  className="w-full h-full"
+                  autoplay={true}
+                  preload="metadata"
+                  onEnded={logger}
+                />
+              ) : (
+                'Video ready to be played.'
+              )}
             </div>
           </div>
           {/* song info */}
@@ -85,5 +101,3 @@ export const Preview = (props) => {
     </>
   )
 }
-
-// You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/.

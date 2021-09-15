@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@cloudflare/stream-react": "^1.2.0",
     "@stripe/stripe-js": "^1.17.1",
     "axios": "^0.21.1",
     "next": "^11.0.1",

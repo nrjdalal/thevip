@@ -2,8 +2,6 @@ import { Preview } from 'components/Preview'
 import { useRouter } from 'next/router'
 
 export async function getServerSideProps(context) {
-  console.log(context.query)
-
   let searchTerm = context.query.slug
 
   let query = `https://api.thevip.io/pre-releases?slug=${searchTerm}`
@@ -40,7 +38,7 @@ const Index = ({ data }) => {
     )
   }
 
-  console.log(data)
+  // console.log(data)
 
   // getting title
   title = data.title
