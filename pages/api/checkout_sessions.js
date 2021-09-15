@@ -37,10 +37,8 @@ export default async function handler(req, res) {
         ],
         payment_method_types: ['card'],
         mode: 'payment',
-        // success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
-        // cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
-        success_url: `${req.headers.origin}`,
-        cancel_url: `${req.headers.origin}`,
+        success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
+        cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
       })
 
       res.status(200).json(session)
