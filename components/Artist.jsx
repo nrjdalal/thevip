@@ -17,7 +17,7 @@ export const PreRelease = (props) => {
     router: {
       fail: router.asPath,
     },
-    metadata: props.data,
+    // metadata: props.data,
   }
 
   const handleSumbit = async () => {
