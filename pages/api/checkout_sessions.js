@@ -5,7 +5,7 @@ const { shuffler } = require('utils/shuffler')
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      // const token = shuffler(16)
+      const token = shuffler(16)
 
       // fs.appendFile(
       //   'public/links/' + req.body.metadata.slug,
@@ -14,6 +14,19 @@ export default async function handler(req, res) {
       //     if (err) throw err
       //   }
       // )
+
+      let data = {
+        slug: req.body.metadata.slug,
+        token: token,
+      }
+
+      await fetch('https://api.thevip.io/verifiers', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
 
       const session = await stripe.checkout.sessions.create({
         line_items: [
