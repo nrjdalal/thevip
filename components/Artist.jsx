@@ -17,7 +17,7 @@ export const PreRelease = (props) => {
     router: {
       fail: router.asPath,
     },
-    // metadata: props.data,
+    metadata: props.data,
   }
 
   const handleSumbit = async () => {
@@ -91,5 +91,3 @@ export const PreRelease = (props) => {
     </>
   )
 }
-
-// You did not provide an API key. You need to provide your API key in the Authorization header, using Bearer auth (e.g. 'Authorization: Bearer YOUR_SECRET_KEY'). See https://stripe.com/docs/api#authentication for details, or we can help at https://support.stripe.com/.

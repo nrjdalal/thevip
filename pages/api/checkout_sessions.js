@@ -5,15 +5,15 @@ const { shuffler } = require('utils/shuffler')
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const token = shuffler(16)
+      // const token = shuffler(16)
 
-      fs.appendFile(
-        'public/links/' + req.body.metadata.slug,
-        req.body.metadata.slug + ' ' + token + '\n',
-        function (err) {
-          if (err) throw err
-        }
-      )
+      // fs.appendFile(
+      //   'public/links/' + req.body.metadata.slug,
+      //   req.body.metadata.slug + ' ' + token + '\n',
+      //   function (err) {
+      //     if (err) throw err
+      //   }
+      // )
 
       const session = await stripe.checkout.sessions.create({
         line_items: [
@@ -24,8 +24,10 @@ export default async function handler(req, res) {
         ],
         payment_method_types: ['card'],
         mode: 'payment',
-        success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
-        cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
+        // success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
+        // cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
+        success_url: `${req.headers.origin}`,
+        cancel_url: `${req.headers.origin}`,
       })
 
       res.status(200).json(session)
