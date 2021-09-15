@@ -36,7 +36,7 @@ const Index = ({ data }) => {
   if (typeof data === 'undefined') {
     return (
       <>
-        <PreRelease />
+        <div className="text-center text-white py-40">No such track</div>
       </>
     )
   }

@@ -1,54 +1,36 @@
 /* eslint-disable @next/next/no-img-element */
 
-import { useRouter } from 'next/router'
-
-export const PreRelease = (props) => {
-  const router = useRouter()
-
-  const data = {
-    product: {
-      currency: props.data.currency.toLowerCase(),
-      product_data: {
-        name: `${props.artist} - ${props.title}`,
-        images: [props.cover],
-      },
-      unit_amount_decimal: props.data.price * 100,
-    },
-    router: {
-      fail: router.asPath,
-    },
-    metadata: props.data,
-  }
-
-  const handleSumbit = async () => {
-    const session = await fetch('/api/checkout_sessions', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Authorization: `Bearer ${process.env.STRIPE_SECRET_KEY}`,
-      },
-      body: JSON.stringify(data),
-    })
-    const res = await session.json()
-    router.push(res.url)
-  }
-
+export const Preview = (props) => {
   return (
     <>
       <div className="bg-raisenBlack py-10 md:py-40">
         {/* section 01 */}
         <div className="max-w-screen-md mx-auto flex flex-col md:flex-row md:px-4">
           {/* cover */}
-          <div className="md:w-1/2 md:order-2 md:ml-2">
-            <div className="aspect-w-1 aspect-h-1">
+          <div className="relative md:w-1/2 md:order-2 md:ml-2">
+            <div className="aspect-w-1 aspect-h-1 filter brightness-50 contrast-50">
               <img
                 className="object-center object-cover"
                 src={
                   props.cover ||
-                  'https://images.unsplash.com/photo-1562860149-691401a306f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
+                  'https://upload.wikimedia.org/wikipedia/commons/thumb/7/70/Solid_white.svg/2048px-Solid_white.svg.png'
                 }
                 alt=""
               />
+            </div>
+            <div className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex flex-col items-center text-center w-full p-6 h-full justify-center">
+              <div className="font-montserrat font-semibold mb-6 text-sm">
+                Please, read before pressing play
+              </div>
+
+              <div className="mb-6 text-sm">
+                After pressing play, you will be able to listen to the music
+                only once.
+              </div>
+
+              <div className="bg-white text-black rounded-md p-1.5 px-3 text-xs font-nunitoSans font-semibold">
+                Take me to the pre-release
+              </div>
             </div>
           </div>
           {/* song info */}
@@ -71,19 +53,10 @@ export const PreRelease = (props) => {
         {/* section 03 */}
         <div className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4">
           <div className="text-white text-center md:text-left">
-            <div className="text-gray-300 font-medium">
-              Countdown to pre-release
+            <div className="font-semibold">Lyrics</div>
+            <div className="mt-2 text-gray-300 font-normal text-sm">
+              {props.lyrics || 'No lyrics available'}
             </div>
-            <div className="mt-2 font-medium">
-              {props.countdown || '00 days | 00 hours | 00 minutes'}
-            </div>
-          </div>
-          {/* button */}
-          <div
-            onClick={handleSumbit}
-            className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md font-medium cursor-pointer"
-          >
-            Buy your ticket now {props.price || '$0.00'}
           </div>
         </div>
       </div>
