@@ -1,6 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
+import { useState } from 'react'
 
 export const Preview = (props) => {
+  const [isStart, setStart] = useState(false)
+
+  const toggleStart = () => {
+    setStart(true)
+  }
+
   return (
     <>
       <div className="bg-raisenBlack py-10 md:py-40">
@@ -28,9 +35,24 @@ export const Preview = (props) => {
                 only once.
               </div>
 
-              <div className="bg-white text-black rounded-md p-1.5 px-3 text-xs font-nunitoSans font-semibold">
+              <div
+                onClick={toggleStart}
+                className="bg-white text-black rounded-md p-1.5 px-3 text-xs font-nunitoSans font-semibold cursor-pointer"
+              >
                 Take me to the pre-release
               </div>
+            </div>
+            {/* streamer */}
+            <div
+              style={isStart ? { display: 'flex' } : { display: 'none' }}
+              className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center"
+            >
+              <iframe
+                src="https://iframe.videodelivery.net/eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0In0.eyJzdWIiOiIyYjA4OTU3MTFjNTc3YTQ1NWM3Mjg2YWRjYzA0MGNiMyIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0IiwiZXhwIjoiMTYzMTUzNjIyMyIsIm5iZiI6IjE2MzE1MjkwMjMifQ.pPPHGnHpDKZXBb9-2h7qnEBsZ5IG_eS7xjA84p9lTNZb6ubJFtwjTb7k352oZ4VAOAJmsCDFTdnebAvaJ8o59BmDBrzwbB9P59BV-QQ4N8BPMdczpN5wgbitjDEWTC4J9lOOrqsA4wWkNoc6M5G-wpAXIX5vPvLp2OoFJ6kwB-aZ6fZisUeiUDMvvT8TbZT3sCrdM3Qx2uKnwBIPSOOTmI_N24c-bQ7eq_lrkaRQoA-7pwP3T5HcI68DkeaKoqRUrJNaUhIwo-hDAYZayQFU90Pm23yqxie7DM6dYk7wyu2vWPIKphABL46TFf1tLcI-sb4nJ-Hk0KAgoTIcscdMig"
+                className="border-none w-full h-full"
+                allow="accelerometer; gyroscope; autoplay; encrypted-media; picture-in-picture;"
+                allowFullScreen="true"
+              ></iframe>
             </div>
           </div>
           {/* song info */}
