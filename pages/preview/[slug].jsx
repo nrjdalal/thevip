@@ -34,7 +34,7 @@ const Index = ({ data }) => {
   if (!token) {
     return (
       <>
-        <div className="text-center text-white py-40">
+        <div className="text-center text-white py-96 px-8">
           Please purchase for access
         </div>
       </>
