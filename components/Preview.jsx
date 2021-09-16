@@ -153,7 +153,7 @@ export const Preview = (props) => {
             <div className="font-italic italic">{props.title}</div>
 
             <img
-              className="mt-6"
+              className="mt-6 h-20"
               src={`https://api.thevip.io${props.predata.artist.signature.url}`}
               alt=""
             />
