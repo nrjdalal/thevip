@@ -4,6 +4,8 @@ import { Stream } from '@cloudflare/stream-react'
 import Countdown from 'react-countdown'
 
 export const Preview = (props) => {
+  let username
+
   const [isStart, setStart] = useState(false)
 
   const toggleStart = () => {
@@ -41,8 +43,8 @@ export const Preview = (props) => {
       <>
         <div className="md:w-1/2 ">
           <div className="text-white p-4 px-4 md:px-0">
-            Hi {props.token.name}, what do you like the most about {props.title}
-            ?
+            Hi {props.token.name || username}, what do you like the most about{' '}
+            {props.title}?
           </div>
 
           <form action="" className="px-4 md:px-0 flex flex-col">
@@ -273,13 +275,16 @@ export const Preview = (props) => {
       newdata.email !== ''
     ) {
       setForm(true)
-    } else {
-      console.log('Fill correct info!')
+
+      username = newdata.name
     }
   }
 
   const ShowForm = () => {
-    if (props.token.name === null && props.token.email === null) {
+    if (
+      (props.token.name === null && props.token.email === null) ||
+      (props.token.name === '' && props.token.email === '')
+    ) {
       return (
         <>
           <form
