@@ -1,19 +1,11 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
-const fs = require('fs')
+
 const { shuffler } = require('utils/shuffler')
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
     try {
-      const token = shuffler(16)
-
-      // fs.appendFile(
-      //   'public/links/' + req.body.metadata.slug,
-      //   req.body.metadata.slug + ' ' + token + '\n',
-      //   function (err) {
-      //     if (err) throw err
-      //   }
-      // )
+      const token = shuffler(64)
 
       let data = {
         slug: req.body.metadata.slug,
@@ -37,8 +29,8 @@ export default async function handler(req, res) {
         ],
         payment_method_types: ['card'],
         mode: 'payment',
-        success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
-        cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}`,
+        success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}&referrer=stripe`,
+        cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}&referrer=stripe`,
       })
 
       res.status(200).json(session)
