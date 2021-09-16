@@ -5,8 +5,6 @@ export default async function handler(req, res) {
 
   response = await response.json()
 
-  console.log(req)
-
   if (response.length === 0) {
     res.status(404).end('Not found!')
   } else {
@@ -23,10 +21,12 @@ export default async function handler(req, res) {
         body: JSON.stringify(data),
       })
 
+      console.log(req.headers.host)
+
       if (req.query.referrer === 'stripe') {
         res.redirect(
           303,
-          `${req.headers.origin}/preview/${req.query.slug}?token=${req.query.token} `
+          `http://${req.headers.host}/preview/${req.query.slug}?token=${req.query.token} `
         )
       } else {
         res.status(200).end('Verified')
