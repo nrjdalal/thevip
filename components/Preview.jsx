@@ -193,7 +193,7 @@ export const Preview = (props) => {
   }
 
   const ShowForm = () => {
-    if (props.token.name === '' && props.token.email === '') {
+    if (props.token.name === null && props.token.email === null) {
       return (
         <>
           <form
