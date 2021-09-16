@@ -1,5 +1,4 @@
 import { Preview } from 'components/Preview'
-import { useRouter } from 'next/router'
 
 export async function getServerSideProps(context) {
   let searchTerm = context.query.slug
@@ -9,14 +8,10 @@ export async function getServerSideProps(context) {
   const res = await fetch(query)
   const data = await res.json()
 
-  console.log(data)
-
   let tokenCheck = `https://api.thevip.io/verifiers?token=${context.query.token}`
 
   const res2 = await fetch(tokenCheck)
   const data2 = await res2.json()
-
-  console.log(data2)
 
   return {
     props: {
@@ -55,8 +50,6 @@ const Index = ({ data }) => {
 
   // getting artist data
   data = data.data[0]
-
-  console.log(data)
 
   if (!data) {
     return (
@@ -100,6 +93,7 @@ const Index = ({ data }) => {
         lyrics={lyrics}
         video={data.streamVideoID}
         date={data.dateEnd}
+        token={token}
       />
     </>
   )

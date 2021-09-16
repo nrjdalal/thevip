@@ -158,9 +158,95 @@ export const Preview = (props) => {
     }
   }
 
+  const [isForm, setForm] = useState(false)
+
+  const handleSubmit = async (e) => {
+    e.preventDefault()
+
+    let data = {
+      name: e.target.name.value,
+      email: e.target.email.value,
+    }
+
+    const newresponse = await fetch(
+      `https://api.thevip.io/verifiers/${props.token.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    )
+
+    let newdata = await newresponse.json()
+
+    if (
+      newresponse.status === 200 &&
+      newdata.name !== '' &&
+      newdata.email !== ''
+    ) {
+      setForm(true)
+    } else {
+      console.log('are you okay?')
+    }
+  }
+
+  const ShowForm = () => {
+    if (props.token.name === '' && props.token.email === '') {
+      return (
+        <>
+          <form
+            style={isForm ? { display: 'none' } : { display: 'flex' }}
+            name="userinfo"
+            onSubmit={(e) => handleSubmit(e)}
+            className="max-w-screen-md mx-auto flex-col items-center px-4 pb-12"
+          >
+            <div className="text-white pb-6">
+              Please save this link by filling information below
+            </div>
+            <div className="w-full md:w-1/2 flex justify-between">
+              <div className="flex flex-col w-4/5">
+                <input
+                  className="mb-6"
+                  type="text"
+                  name="name"
+                  placeholder="Name"
+                />
+                <input
+                  className=""
+                  type="text"
+                  name="email"
+                  placeholder="Email"
+                />
+              </div>
+              <button className="bg-blue-200 h-[108px] w-1/6 rounded-xl flex justify-center items-center">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  className="h-8 w-8"
+                  viewBox="0 0 20 20"
+                  fill="currentColor"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </>
+      )
+    } else {
+      return <></>
+    }
+  }
+
   return (
     <>
       <div className="bg-raisenBlack py-10 md:py-40">
+        <ShowForm />
         {/* section 01 */}
         <div className="max-w-screen-md mx-auto flex flex-col md:flex-row md:px-4">
           {/* cover */}
