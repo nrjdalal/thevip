@@ -9,18 +9,52 @@ export async function getServerSideProps(context) {
   const res = await fetch(query)
   const data = await res.json()
 
+  console.log(data)
+
+  let tokenCheck = `https://api.thevip.io/verifiers?token=${context.query.token}`
+
+  const res2 = await fetch(tokenCheck)
+  const data2 = await res2.json()
+
+  console.log(data2)
+
   return {
-    props: { data },
+    props: {
+      data: {
+        data: data,
+        token: data2,
+      },
+    },
   }
 }
 
 const Index = ({ data }) => {
-  const router = useRouter()
+  let token = data.token[0]
+
+  if (!token) {
+    return (
+      <>
+        <div className="text-center text-white py-40">
+          Please purchase for access
+        </div>
+      </>
+    )
+  }
+
+  if (typeof token === 'undefined') {
+    return (
+      <>
+        <div className="text-center text-white py-96 px-8">
+          Please purchase for access
+        </div>
+      </>
+    )
+  }
 
   let title, artist, label, cover, lyrics
 
   // getting artist data
-  data = data[0]
+  data = data.data[0]
 
   if (!data) {
     return (
@@ -38,8 +72,6 @@ const Index = ({ data }) => {
     )
   }
 
-  // console.log(data)
-
   // getting title
   title = data.title
 
@@ -56,7 +88,7 @@ const Index = ({ data }) => {
 
   lyrics = data.lyrics
 
-  console.log(lyrics)
+  // console.log(lyrics)
 
   return (
     <>

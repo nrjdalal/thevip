@@ -15,8 +15,7 @@ export const Preview = (props) => {
     setEnded(true)
   }
 
-  const videoIdOrSignedUrl =
-    'eyJhbGciOiJSUzI1NiIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0In0.eyJzdWIiOiIyYjA4OTU3MTFjNTc3YTQ1NWM3Mjg2YWRjYzA0MGNiMyIsImtpZCI6IjdhZDI2YTY1Y2M5NWU3YjM0NWVjMzVkZmIyZDJkYzQ0IiwiZXhwIjoiMTYzMTUzNjIyMyIsIm5iZiI6IjE2MzE1MjkwMjMifQ.pPPHGnHpDKZXBb9-2h7qnEBsZ5IG_eS7xjA84p9lTNZb6ubJFtwjTb7k352oZ4VAOAJmsCDFTdnebAvaJ8o59BmDBrzwbB9P59BV-QQ4N8BPMdczpN5wgbitjDEWTC4J9lOOrqsA4wWkNoc6M5G-wpAXIX5vPvLp2OoFJ6kwB-aZ6fZisUeiUDMvvT8TbZT3sCrdM3Qx2uKnwBIPSOOTmI_N24c-bQ7eq_lrkaRQoA-7pwP3T5HcI68DkeaKoqRUrJNaUhIwo-hDAYZayQFU90Pm23yqxie7DM6dYk7wyu2vWPIKphABL46TFf1tLcI-sb4nJ-Hk0KAgoTIcscdMig'
+  const videoIdOrSignedUrl = '2b0895711c577a455c7286adcc040cb3'
 
   return (
     <>

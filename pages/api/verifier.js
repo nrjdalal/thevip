@@ -27,7 +27,7 @@ export default async function handler(req, res) {
           `http://${req.headers.host}/preview/${req.query.slug}?token=${req.query.token} `
         )
       } else {
-        res.status(200).end('Verified')
+        res.status(200)
       }
     } catch (err) {
       res.status(err.statusCode || 500).json(err.message)
