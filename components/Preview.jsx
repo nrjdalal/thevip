@@ -15,7 +15,7 @@ export const Preview = (props) => {
     setEnded(true)
   }
 
-  const videoIdOrSignedUrl = '2b0895711c577a455c7286adcc040cb3'
+  const videoIdOrSignedUrl = props.video
 
   return (
     <>

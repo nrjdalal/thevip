@@ -56,6 +56,8 @@ const Index = ({ data }) => {
   // getting artist data
   data = data.data[0]
 
+  console.log(data)
+
   if (!data) {
     return (
       <>
@@ -98,6 +100,7 @@ const Index = ({ data }) => {
         label={label}
         cover={cover}
         lyrics={lyrics}
+        video={data.streamVideoID}
       />
     </>
   )
