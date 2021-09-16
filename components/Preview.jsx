@@ -36,7 +36,9 @@ export const Preview = (props) => {
           <div className="max-w-screen-md mx-auto pt-10 flex flex-col items-center md:px-4">
             <div className="text-white text-center">
               <div className="text-gray-300 font-medium">
-                Countdown to pre-release
+                Thank you for contributing!
+                <br />
+                Please come back in
               </div>
               <div className="mt-2 font-medium">
                 <Countdown date={props.date} renderer={renderer} />
@@ -131,7 +133,7 @@ export const Preview = (props) => {
               <Stream
                 src={videoIdOrSignedUrl}
                 className="w-full h-full"
-                autoplay={true}
+                autoplay={isEnded ? false : true}
                 preload="metadata"
                 onEnded={toggleEnded}
               />
