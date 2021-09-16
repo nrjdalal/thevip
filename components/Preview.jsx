@@ -63,21 +63,40 @@ export const Preview = (props) => {
         </>
       )
     } else {
-      return (
-        <>
-          <div
-            style={isEnded ? { display: 'none' } : { display: 'flex' }}
-            className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4"
-          >
-            <div className="text-white text-center md:text-left">
-              <div className="font-semibold">Lyrics</div>
-              <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
-                {props.lyrics || 'No lyrics available'}
+      if (props.token.play === true) {
+        return (
+          <>
+            <div className="flex max-w-screen-md mx-auto mt-6 md:mt-0 flex-col md:flex-row md:pl-4">
+              <div className="md:w-1/2 ">
+                <div className="text-white p-4 px-4 md:px-0">
+                  Hi {props.token.name}, what do you like the most about{' '}
+                  {props.title}?
+                </div>
+
+                <form action="" className="px-4 md:px-0 flex flex-col">
+                  <input type="text" name="" id="" />
+                  <button className="bg-white text-black p-2 mt-4 rounded-xl">
+                    Send Message
+                  </button>
+                </form>
               </div>
             </div>
-          </div>
-        </>
-      )
+          </>
+        )
+      } else {
+        return (
+          <>
+            <div className="flex max-w-screen-md mx-auto pt-10 flex-col md:flex-row items-center justify-between md:px-4">
+              <div className="text-white text-center md:text-left">
+                <div className="font-semibold">Lyrics</div>
+                <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
+                  {props.lyrics || 'No lyrics available'}
+                </div>
+              </div>
+            </div>
+          </>
+        )
+      }
     }
   }
 
