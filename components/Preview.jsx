@@ -145,7 +145,7 @@ export const Preview = (props) => {
           {/* after playback */}
           <div
             style={isEnded ? { display: 'flex' } : { display: 'none' }}
-            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa]"
+            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa] px-4"
           >
             <div className="text-4xl italic">Thank you!</div>
 
