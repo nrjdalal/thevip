@@ -43,7 +43,7 @@ export const Preview = (props) => {
       <>
         <div className="md:w-1/2 ">
           <div className="text-white p-4 px-4 md:px-0">
-            Hi {props.token.name || username}, what do you like the most about{' '}
+            Hi {' ' + props.token.name || ''}, what do you like the most about{' '}
             {props.title}?
           </div>
 
