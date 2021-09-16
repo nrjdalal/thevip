@@ -94,7 +94,10 @@ export const Preview = (props) => {
       } else {
         return (
           <>
-            <div className="flex max-w-screen-md mx-auto pt-10 flex-col md:flex-row items-center justify-between md:px-4">
+            <div
+              style={isEnded ? { display: 'none' } : { display: 'flex' }}
+              className="max-w-screen-md mx-auto pt-10 flex-col md:flex-row items-center justify-between md:px-4"
+            >
               <div className="text-white text-center md:text-left">
                 <div className="font-semibold">Lyrics</div>
                 <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
