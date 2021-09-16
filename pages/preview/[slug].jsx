@@ -94,6 +94,7 @@ const Index = ({ data }) => {
         video={data.streamVideoID}
         date={data.dateEnd}
         token={token}
+        predata={data}
       />
     </>
   )

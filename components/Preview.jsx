@@ -145,13 +145,22 @@ export const Preview = (props) => {
           {/* after playback */}
           <div
             style={isEnded ? { display: 'flex' } : { display: 'none' }}
-            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center aspect-w-1 aspect-h-1"
+            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa]"
           >
+            <div className="text-4xl">Thank you!</div>
+
+            <div className="pt-6 font-thin">for being a supporter of</div>
+            <div className="font-italic italic">{props.title}</div>
+
             <img
-              className="object-cover object-center"
-              src="https://optinmonster.com/wp-content/uploads/2016/10/Anatomy-of-the-Perfect-Thank-You-Page.png"
+              className="mt-6"
+              src={`https://api.thevip.io${props.predata.artist.signature.url}`}
               alt=""
             />
+
+            <div>
+              {props.predata.artist.artistName} {Date()}
+            </div>
           </div>
         </>
       )
@@ -188,7 +197,7 @@ export const Preview = (props) => {
     ) {
       setForm(true)
     } else {
-      console.log('are you okay?')
+      console.log('Fill correct info!')
     }
   }
 
