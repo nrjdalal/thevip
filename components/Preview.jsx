@@ -36,6 +36,26 @@ export const Preview = (props) => {
   let currentDate = parseInt((new Date().getTime() / 1000).toFixed(0))
   let preDate = parseInt((new Date(props.date).getTime() / 1000).toFixed(0))
 
+  const Review = () => {
+    return (
+      <>
+        <div className="md:w-1/2 ">
+          <div className="text-white p-4 px-4 md:px-0">
+            Hi {props.token.name}, what do you like the most about {props.title}
+            ?
+          </div>
+
+          <form action="" className="px-4 md:px-0 flex flex-col">
+            <input type="text" name="" id="" />
+            <button className="bg-white text-black p-2 mt-4 rounded-xl">
+              Send Message
+            </button>
+          </form>
+        </div>
+      </>
+    )
+  }
+
   const LowerSegment = () => {
     if (currentDate < preDate) {
       const renderer = ({ days, hours, minutes }) => {
@@ -67,19 +87,7 @@ export const Preview = (props) => {
         return (
           <>
             <div className="flex max-w-screen-md mx-auto mt-6 md:mt-0 flex-col md:flex-row md:pl-4">
-              <div className="md:w-1/2 ">
-                <div className="text-white p-4 px-4 md:px-0">
-                  Hi {props.token.name}, what do you like the most about{' '}
-                  {props.title}?
-                </div>
-
-                <form action="" className="px-4 md:px-0 flex flex-col">
-                  <input type="text" name="" id="" />
-                  <button className="bg-white text-black p-2 mt-4 rounded-xl">
-                    Send Message
-                  </button>
-                </form>
-              </div>
+              <Review />
             </div>
           </>
         )
