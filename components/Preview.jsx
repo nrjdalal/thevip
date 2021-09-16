@@ -290,11 +290,17 @@ export const Preview = (props) => {
           className="max-w-screen-md mx-auto mt-6 md:mt-0 flex flex-col md:flex-row md:pl-4"
         >
           <div className="md:w-1/2 ">
-            <img
-              className="w-full"
-              src="https://i.ibb.co/P50thSV/Screenshot-2021-09-15-at-19-14-46-Zeplin-Projects.png"
-              alt=""
-            />
+            <div className="text-white p-4 px-4 md:px-0">
+              Hi {props.token.name}, what do you like the most about{' '}
+              {props.title}?
+            </div>
+
+            <form action="" className="px-4 md:px-0 flex flex-col">
+              <input type="text" name="" id="" />
+              <button className="bg-white text-black p-2 mt-4 rounded-xl">
+                Send Message
+              </button>
+            </form>
           </div>
         </div>
 
