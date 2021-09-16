@@ -21,8 +21,6 @@ export default async function handler(req, res) {
         body: JSON.stringify(data),
       })
 
-      console.log(req.headers.host)
-
       if (req.query.referrer === 'stripe') {
         res.redirect(
           303,

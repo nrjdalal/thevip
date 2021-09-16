@@ -53,29 +53,10 @@ const Index = ({ data }) => {
   cover = `https://api.thevip.io${data.cover.url}`
 
   // getting lyrics
+
   lyrics = data.lyrics
 
-  // // getting selective pre-release
-  // let pre_release = data.pre_releases[data.pre_releases.length - 1]
-
-  // if (router.query.slug.length === 2) {
-  //   for (let i = 0; i < data.pre_releases.length; i++) {
-  //     if (router.query.slug[1] === data.pre_releases[i].slug) {
-  //       pre_release = data.pre_releases[i]
-  //     }
-  //   }
-  // }
-
-  // // getting label
-  // for (let i = 0; i < data.labels.length; i++) {
-  //   if (pre_release.label === data.labels[i].id) {
-  //     label = data.labels[i].name
-  //   }
-  // }
-
-  // title = pre_release.title
-  // artist = data.artistName
-  // cover = `https://api.thevip.io${pre_release.cover.url}`
+  console.log(lyrics)
 
   return (
     <>
