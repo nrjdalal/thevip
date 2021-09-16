@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { useState } from 'react'
 import { Stream } from '@cloudflare/stream-react'
+import Countdown from 'react-countdown'
 
 export const Preview = (props) => {
   const [isStart, setStart] = useState(false)
@@ -16,6 +17,52 @@ export const Preview = (props) => {
   }
 
   const videoIdOrSignedUrl = props.video
+
+  let currentDate = parseInt((new Date().getTime() / 1000).toFixed(0))
+  let preDate = parseInt((new Date(props.date).getTime() / 1000).toFixed(0))
+
+  const LowerSegment = () => {
+    if (currentDate < preDate) {
+      const renderer = ({ days, hours, minutes }) => {
+        return (
+          <>
+            {days} days | {hours} hours | {minutes} minutes
+          </>
+        )
+      }
+
+      return (
+        <>
+          <div className="max-w-screen-md mx-auto pt-10 flex flex-col items-center md:px-4">
+            <div className="text-white text-center">
+              <div className="text-gray-300 font-medium">
+                Countdown to pre-release
+              </div>
+              <div className="mt-2 font-medium">
+                <Countdown date={props.date} renderer={renderer} />
+              </div>
+            </div>
+          </div>
+        </>
+      )
+    } else {
+      return (
+        <>
+          <div
+            style={isEnded ? { display: 'none' } : { display: 'flex' }}
+            className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4"
+          >
+            <div className="text-white text-center md:text-left">
+              <div className="font-semibold">Lyrics</div>
+              <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
+                {props.lyrics || 'No lyrics available'}
+              </div>
+            </div>
+          </div>
+        </>
+      )
+    }
+  }
 
   return (
     <>
@@ -102,17 +149,8 @@ export const Preview = (props) => {
         <div className="hidden md:block mx-auto max-w-[736px] h-[1px] bg-gray-300"></div>
 
         {/* section 03 */}
-        <div
-          style={isEnded ? { display: 'none' } : { display: 'flex' }}
-          className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4"
-        >
-          <div className="text-white text-center md:text-left">
-            <div className="font-semibold">Lyrics</div>
-            <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
-              {props.lyrics || 'No lyrics available'}
-            </div>
-          </div>
-        </div>
+
+        <LowerSegment />
 
         {/* after playback */}
 

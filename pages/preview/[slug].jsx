@@ -90,8 +90,6 @@ const Index = ({ data }) => {
 
   lyrics = data.lyrics
 
-  // console.log(lyrics)
-
   return (
     <>
       <Preview
@@ -101,6 +99,7 @@ const Index = ({ data }) => {
         cover={cover}
         lyrics={lyrics}
         video={data.streamVideoID}
+        date={data.dateEnd}
       />
     </>
   )
