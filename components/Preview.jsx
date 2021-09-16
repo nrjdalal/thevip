@@ -12,8 +12,23 @@ export const Preview = (props) => {
 
   const [isEnded, setEnded] = useState(false)
 
-  const toggleEnded = () => {
+  const toggleEnded = async () => {
     setEnded(true)
+
+    let data = {
+      play: true,
+    }
+
+    const newresponse = await fetch(
+      `https://api.thevip.io/verifiers/${props.token.id}`,
+      {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      }
+    )
   }
 
   const videoIdOrSignedUrl = props.video
@@ -80,6 +95,88 @@ export const Preview = (props) => {
         </>
       )
     } else {
+      const PlaySegment = () => {
+        if (props.token.play === false) {
+          return (
+            <>
+              <div
+                style={isStart ? { display: 'none' } : { display: 'flex' }}
+                className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full p-6 h-full justify-center"
+              >
+                <div className="mb-6 bg-white h-6 w-6 flex items-center justify-center rounded-full">
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    className="h-5 w-5 text-[#18a0aa]"
+                    viewBox="0 0 20 20"
+                    fill="currentColor"
+                  >
+                    <path
+                      fillRule="evenodd"
+                      d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
+                      clipRule="evenodd"
+                    />
+                  </svg>
+                </div>
+
+                <div className="font-montserrat font-semibold mb-6 text-sm">
+                  Please, read before pressing play
+                </div>
+
+                <div className="mb-6 text-sm">
+                  After pressing play, you will be able to listen to the music
+                  only once.
+                </div>
+
+                <div
+                  onClick={toggleStart}
+                  className="bg-white text-black rounded-md p-1.5 px-3 text-xs font-nunitoSans font-semibold cursor-pointer"
+                >
+                  Take me to the pre-release
+                </div>
+              </div>
+              {/* streamer */}
+              <div
+                style={isStart ? { display: 'flex' } : { display: 'none' }}
+                className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center"
+              >
+                {isStart ? (
+                  <Stream
+                    src={videoIdOrSignedUrl}
+                    className="w-full h-full"
+                    autoplay={isEnded ? false : true}
+                    preload="metadata"
+                    onEnded={toggleEnded}
+                  />
+                ) : (
+                  'Video ready to be played.'
+                )}
+              </div>
+            </>
+          )
+        } else {
+          return (
+            <>
+              <div className="absolute flex text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa] px-4">
+                <div className="text-4xl italic">Thank you!</div>
+
+                <div className="pt-6 font-thin">for being a supporter of</div>
+                <div className="font-italic italic">{props.title}</div>
+
+                <img
+                  className="mt-6 h-20"
+                  src={`https://api.thevip.io${props.predata.artist.signature.url}`}
+                  alt=""
+                />
+
+                <div>
+                  {props.predata.artist.artistName} {Date()}
+                </div>
+              </div>
+            </>
+          )
+        }
+      }
+
       return (
         <>
           <div className="aspect-w-1 aspect-h-1 filter brightness-50 contrast-50">
@@ -89,58 +186,8 @@ export const Preview = (props) => {
               alt=""
             />
           </div>
-          <div
-            style={isStart ? { display: 'none' } : { display: 'flex' }}
-            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full p-6 h-full justify-center"
-          >
-            <div className="mb-6 bg-white h-6 w-6 flex items-center justify-center rounded-full">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                className="h-5 w-5 text-[#18a0aa]"
-                viewBox="0 0 20 20"
-                fill="currentColor"
-              >
-                <path
-                  fillRule="evenodd"
-                  d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7 4a1 1 0 11-2 0 1 1 0 012 0zm-1-9a1 1 0 00-1 1v4a1 1 0 102 0V6a1 1 0 00-1-1z"
-                  clipRule="evenodd"
-                />
-              </svg>
-            </div>
 
-            <div className="font-montserrat font-semibold mb-6 text-sm">
-              Please, read before pressing play
-            </div>
-
-            <div className="mb-6 text-sm">
-              After pressing play, you will be able to listen to the music only
-              once.
-            </div>
-
-            <div
-              onClick={toggleStart}
-              className="bg-white text-black rounded-md p-1.5 px-3 text-xs font-nunitoSans font-semibold cursor-pointer"
-            >
-              Take me to the pre-release
-            </div>
-          </div>
-          {/* streamer */}
-          <div
-            style={isStart ? { display: 'flex' } : { display: 'none' }}
-            className="absolute text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center"
-          >
-            {isStart ? (
-              <Stream
-                src={videoIdOrSignedUrl}
-                className="w-full h-full"
-                autoplay={isEnded ? false : true}
-                preload="metadata"
-                onEnded={toggleEnded}
-              />
-            ) : (
-              'Video ready to be played.'
-            )}
-          </div>
+          <PlaySegment />
 
           {/* after playback */}
           <div
