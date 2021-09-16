@@ -108,7 +108,7 @@ export const Preview = (props) => {
         >
           <div className="text-white text-center md:text-left">
             <div className="font-semibold">Lyrics</div>
-            <div className="mt-2 text-gray-300 font-normal text-sm">
+            <div className="mt-2 text-gray-300 font-normal text-sm whitespace-pre">
               {props.lyrics || 'No lyrics available'}
             </div>
           </div>
