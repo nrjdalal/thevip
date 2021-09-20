@@ -1,0 +1,10 @@
+# Local keys
+
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
+
+# Platform and local keys
+
+STRIPE_SECRET_KEY=
+SENDGRID_API_KEY=
+
+# create a .env.local file and also upload this in environment variable at vercel
