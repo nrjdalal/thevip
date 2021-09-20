@@ -18,7 +18,7 @@ export const Preview = (props) => {
       return
     }
 
-    toPng(ref.current, { cacheBust: true })
+    toPng(ref.current, { width: 500, height: 500, cacheBust: true })
       .then((dataUrl) => {
         const link = document.createElement('a')
         link.download = 'my-image-name.png'
