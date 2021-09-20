@@ -252,18 +252,18 @@ export const Preview = (props) => {
                 onClick={onButtonClick}
                 className="absolute flex text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa] px-4"
               >
-                <div className="text-4xl italic">Thank you!</div>
+                <div className="text-4xl font-thin">Thank you!</div>
 
                 <div className="pt-6 font-thin">for being a supporter of</div>
                 <div className="font-italic italic">{props.title}</div>
 
                 <img
-                  className="mt-6 h-20"
+                  className="mt-4 h-20"
                   src={`https://api.thevip.io${props.predata.artist.signature.url}`}
                   alt=""
                 />
 
-                <div>
+                <div className="pt-2">
                   {props.predata.artist.artistName}
                   {', '}
                   {today.toLocaleDateString('en-US', options)}
