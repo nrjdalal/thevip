@@ -2,9 +2,35 @@
 import { useState } from 'react'
 import { Stream } from '@cloudflare/stream-react'
 import Countdown from 'react-countdown'
+import { useRouter } from 'next/router'
+import { useCallback, useRef } from 'react'
+import { toPng } from 'html-to-image'
 
 export const Preview = (props) => {
-  let username
+  const router = useRouter()
+
+  // image generation
+
+  const ref = useRef([])
+
+  const onButtonClick = useCallback(() => {
+    if (ref.current === null) {
+      return
+    }
+
+    toPng(ref.current, { cacheBust: true })
+      .then((dataUrl) => {
+        const link = document.createElement('a')
+        link.download = 'my-image-name.png'
+        link.href = dataUrl
+        link.click()
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+  }, [ref])
+
+  // image generation over
 
   const [isStart, setStart] = useState(false)
 
@@ -33,6 +59,29 @@ export const Preview = (props) => {
     )
   }
 
+  const feedback = async (e) => {
+    e.preventDefault()
+
+    if (e.target.feedback.value !== '') {
+      let data = {
+        feedback: `${e.target.feedback.value} by name - ${props.token.name} & email - ${props.token.email}`,
+        pre_release: props.predata.id,
+      }
+
+      await fetch(`https://api.thevip.io/pr-feedbacks`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
+
+      alert('Thank you for the feedback!')
+
+      e.target.feedback.value = ''
+    }
+  }
+
   const videoIdOrSignedUrl = props.video
 
   let currentDate = parseInt((new Date().getTime() / 1000).toFixed(0))
@@ -47,8 +96,11 @@ export const Preview = (props) => {
             {props.title}?
           </div>
 
-          <form action="" className="px-4 md:px-0 flex flex-col">
-            <input type="text" name="" id="" />
+          <form
+            onSubmit={(e) => feedback(e)}
+            className="px-4 md:px-0 flex flex-col"
+          >
+            <input type="text" name="feedback" id="" />
             <button className="bg-white text-black p-2 mt-4 rounded-xl">
               Send Message
             </button>
@@ -188,7 +240,11 @@ export const Preview = (props) => {
         } else {
           return (
             <>
-              <div className="absolute flex text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa] px-4">
+              <div
+                ref={ref}
+                onClick={onButtonClick}
+                className="absolute flex text-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex-col items-center text-center w-full h-full justify-center bg-[#18a0aa] px-4"
+              >
                 <div className="text-4xl italic">Thank you!</div>
 
                 <div className="pt-6 font-thin">for being a supporter of</div>
@@ -276,7 +332,21 @@ export const Preview = (props) => {
     ) {
       setForm(true)
 
-      username = newdata.name
+      const data = {
+        token: router.asPath,
+        name: newdata.name,
+        email: newdata.email,
+      }
+
+      // add sendgrid here
+
+      await fetch('/api/mailer', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      })
     }
   }
 
