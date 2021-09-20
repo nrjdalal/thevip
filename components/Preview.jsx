@@ -238,6 +238,13 @@ export const Preview = (props) => {
             </>
           )
         } else {
+          var options = {
+            month: 'short',
+            day: '2-digit',
+            year: 'numeric',
+          }
+          var today = new Date()
+
           return (
             <>
               <div
@@ -257,7 +264,9 @@ export const Preview = (props) => {
                 />
 
                 <div>
-                  {props.predata.artist.artistName} {Date()}
+                  {props.predata.artist.artistName}
+                  {', '}
+                  {today.toLocaleDateString('en-US', options)}
                 </div>
               </div>
             </>
