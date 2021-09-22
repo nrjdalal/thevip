@@ -59,40 +59,70 @@ export const Preview = (props) => {
     )
   }
 
-  const feedback = async (e) => {
-    e.preventDefault()
-
-    if (e.target.feedback.value !== '') {
-      let data = {
-        feedback: `${e.target.feedback.value} by name - ${props.token.name} & email - ${props.token.email}`,
-        pre_release: props.predata.id,
-      }
-
-      await fetch(`https://api.thevip.io/pr-feedbacks`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      })
-
-      alert('Thank you for the feedback!')
-
-      e.target.feedback.value = ''
-    }
-  }
-
   const videoIdOrSignedUrl = props.video
 
   let currentDate = parseInt((new Date().getTime() / 1000).toFixed(0))
   let preDate = parseInt((new Date(props.date).getTime() / 1000).toFixed(0))
 
   const Review = () => {
+    const [isFeedback, setFeedback] = useState(false)
+
+    const feedback = async (e) => {
+      e.preventDefault()
+
+      if (e.target.feedback.value !== '') {
+        let data = {
+          feedback: `${e.target.feedback.value} by name - ${props.token.name} & email - ${props.token.email}`,
+          pre_release: props.predata.id,
+        }
+
+        await fetch(`https://api.thevip.io/pr-feedbacks`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(data),
+        })
+
+        await fetch(`https://api.thevip.io/verifiers/${props.token.id}`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ feedback: true }),
+        })
+
+        // alert('Thank you for the feedback!')
+
+        // e.target.feedback.value = ''
+
+        setFeedback(true)
+      }
+    }
+
+    const FeedbackOption = () => {
+      if (props.token.feedback === false && isFeedback === false) {
+        return (
+          <>
+            <input type="text" name="feedback" />
+            <button className="bg-white text-black p-2 mt-4 rounded-xl">
+              Send Message
+            </button>
+          </>
+        )
+      } else
+        return (
+          <>
+            <div className="text-white">Thank you for your feedback.</div>
+          </>
+        )
+    }
+
     return (
       <>
         <div className="md:w-1/2 ">
           <div className="text-white p-4 px-4 md:px-0">
-            Hi {props.token.name || ''}, what do you like the most about{' '}
+            Hi {props.token.name} baba, what do you like the most about{' '}
             {props.title}?
           </div>
 
@@ -100,10 +130,7 @@ export const Preview = (props) => {
             onSubmit={(e) => feedback(e)}
             className="px-4 md:px-0 flex flex-col"
           >
-            <input type="text" name="feedback" id="" />
-            <button className="bg-white text-black p-2 mt-4 rounded-xl">
-              Send Message
-            </button>
+            <FeedbackOption />
           </form>
         </div>
       </>
@@ -361,8 +388,10 @@ export const Preview = (props) => {
 
   const ShowForm = () => {
     if (
-      (props.token.name === null && props.token.email === null) ||
-      (props.token.name === '' && props.token.email === '')
+      props.token.name === null ||
+      props.token.email === null ||
+      props.token.name === '' ||
+      props.token.email === ''
     ) {
       return (
         <>
@@ -443,29 +472,6 @@ export const Preview = (props) => {
         {/* section 03 */}
 
         <LowerSegment />
-
-        {/* after playback */}
-
-        <div
-          style={isEnded ? { display: 'flex' } : { display: 'none' }}
-          className="max-w-screen-md mx-auto mt-6 md:mt-0 flex flex-col md:flex-row md:pl-4"
-        >
-          <div className="md:w-1/2 ">
-            <div className="text-white p-4 px-4 md:px-0">
-              Hi {props.token.name}, what do you like the most about{' '}
-              {props.title}?
-            </div>
-
-            <form action="" className="px-4 md:px-0 flex flex-col">
-              <input type="text" name="" id="" />
-              <button className="bg-white text-black p-2 mt-4 rounded-xl">
-                Send Message
-              </button>
-            </form>
-          </div>
-        </div>
-
-        {/* closing div */}
       </div>
     </>
   )
