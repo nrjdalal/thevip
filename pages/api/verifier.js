@@ -1,4 +1,29 @@
+const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+
 export default async function handler(req, res) {
+  let data = {
+    active: true,
+  }
+
+  const sessions = await stripe.checkout.sessions.list({ limit: 100 })
+
+  for (let i = 0; i < sessions.data.length; i++) {
+    if (sessions.data[i].metadata.token === req.query.token) {
+      const customer = await stripe.customers.retrieve(
+        sessions.data[i].customer
+      )
+
+      if (customer.name !== null && customer.email !== null) {
+        data = {
+          active: true,
+          name: customer.name,
+          email: customer.email,
+        }
+      }
+      break
+    }
+  }
+
   let response = await fetch(
     `https://api.thevip.io/verifiers?slug=${req.query.slug}&token=${req.query.token}`
   )
@@ -9,10 +34,6 @@ export default async function handler(req, res) {
     res.status(404).end('Not found!')
   } else {
     try {
-      let data = {
-        active: true,
-      }
-
       await fetch(`https://api.thevip.io/verifiers/${response[0].id}`, {
         method: 'PUT',
         headers: {

@@ -29,8 +29,9 @@ export default async function handler(req, res) {
         ],
         payment_method_types: ['card'],
         mode: 'payment',
-        success_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}&referrer=stripe`,
-        cancel_url: `${req.headers.origin}/api/verifier?slug=${req.body.metadata.slug}&token=${token}&referrer=stripe`,
+        success_url: `${req.headers.origin}/api/verifier?slug=${data.slug}&token=${token}&referrer=stripe`,
+        cancel_url: `${req.headers.origin}`,
+        metadata: data,
       })
 
       res.status(200).json(session)
