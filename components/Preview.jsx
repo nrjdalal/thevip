@@ -92,10 +92,6 @@ export const Preview = (props) => {
           body: JSON.stringify({ feedback: true }),
         })
 
-        // alert('Thank you for the feedback!')
-
-        // e.target.feedback.value = ''
-
         setFeedback(true)
       }
     }

@@ -1,4 +1,5 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
+const sgMail = require('@sendgrid/mail')
 
 export default async function handler(req, res) {
   let data = {
@@ -20,6 +21,21 @@ export default async function handler(req, res) {
           email: customer.email,
         }
       }
+
+      sgMail.setApiKey(process.env.SENDGRID_API_KEY)
+
+      const msg = {
+        to: customer.email,
+
+        from: 'alvo@thevip.io',
+
+        subject: 'Here is your preview url',
+
+        html: `<a>http://${req.headers.host}/preview/${req.query.slug}?token=${req.query.token}</a>`,
+      }
+
+      await sgMail.send(msg)
+
       break
     }
   }
@@ -45,7 +61,7 @@ export default async function handler(req, res) {
       if (req.query.referrer === 'stripe') {
         res.redirect(
           303,
-          `http://${req.headers.host}/preview/${req.query.slug}?token=${req.query.token} `
+          `http://${req.headers.host}/preview/${req.query.slug}?token=${req.query.token}`
         )
       } else {
         res.status(200)
