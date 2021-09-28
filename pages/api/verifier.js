@@ -1,5 +1,7 @@
 const stripe = require('stripe')(process.env.STRIPE_SECRET_KEY)
 const sgMail = require('@sendgrid/mail')
+import axios from 'axios'
+const { shuffler } = require('utils/shuffler')
 
 export default async function handler(req, res) {
   let data = {
@@ -35,6 +37,23 @@ export default async function handler(req, res) {
       }
 
       await sgMail.send(msg)
+
+      try {
+        const token = new Date().getTime() + '-' + shuffler(6)
+
+        const axr = await axios.post(
+          'https://api.thevip.io/auth/local/register',
+          {
+            username: token,
+            email: customer.email,
+            password: customer.email,
+          }
+        )
+
+        console.log(await axr.data)
+      } catch (e) {
+        console.log(e.message)
+      }
 
       break
     }
