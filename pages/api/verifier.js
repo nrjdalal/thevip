@@ -47,6 +47,7 @@ export default async function handler(req, res) {
             username: token,
             email: customer.email,
             password: customer.email,
+            fullname: customer.name,
           }
         )
 
