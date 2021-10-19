@@ -12,6 +12,8 @@ export async function getServerSideProps(context) {
   const res = await fetch(query)
   const data = await res.json()
 
+  console.log(data)
+
   return {
     props: { data },
   }
@@ -28,7 +30,7 @@ const Index = ({ data }) => {
   if (!data) {
     return (
       <>
-        <div className="text-center text-white py-40">No such track</div>
+        <div className="py-40 text-center text-white">No such track</div>
       </>
     )
   }
@@ -36,7 +38,7 @@ const Index = ({ data }) => {
   if (typeof data === 'undefined') {
     return (
       <>
-        <div className="text-center text-white py-40">No such track</div>
+        <div className="py-40 text-center text-white">No such track</div>
       </>
     )
   }

@@ -3,18 +3,14 @@
 const Footer = () => {
   return (
     <>
-      <footer className="bg-black flex flex-col items-center ">
-        <div className="max-w-screen-md mx-auto py-10 ">
+      <footer className="flex flex-col items-center bg-black ">
+        <div className="max-w-screen-md py-10 mx-auto ">
           {/* logo */}
           <div className="flex justify-center">
-            <img
-              className="w-40"
-              src="https://placeholder.com/wp-content/uploads/2018/10/placeholder-1.webp"
-              alt=""
-            />
+            <img className="w-20" src="/kloov_logo.svg" alt="" />
           </div>
           {/* links */}
-          <div className="text-white flex justify-between pt-10 w-72 text-xs md:w-80 md:text-sm font-nunitoSans">
+          <div className="flex justify-between pt-10 text-xs text-white w-72 md:w-80 md:text-sm font-nunitoSans">
             <div>About Us</div>
             <div>Terms</div>
             <div>Privacy Policy</div>
