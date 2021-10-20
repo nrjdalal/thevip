@@ -34,16 +34,72 @@ export const PreRelease = (props) => {
     router.push(res.url)
   }
 
+  console.log(props.nft)
+  const NFT = () => {
+    if (props.nft !== 'false') {
+      return (
+        <>
+          <div className="flex flex-col items-center max-w-screen-md px-4 pt-12 mx-auto md:flex-row md:items-start">
+            <div className="flex flex-col items-center md:w-1/3">
+              <img
+                className="w-4/5 md:w-full"
+                src={'https://api.thevip.io' + props.nft[0].NFTimage.url}
+                alt=""
+              />
+              <div className="pt-6 text-sm text-gray-300 font-nunitoSans">
+                {props.nft[0].description}
+              </div>
+            </div>
+            <div className="pl-20 md:w-2/3">
+              <div className="font-medium text-white font-montserrat ">
+                {props.nft[0].collectionName}
+              </div>
+
+              <div className="flex justify-between pt-5">
+                <div className="text-gray-300">Created by</div>
+                <div className="text-gray-300">Editions</div>
+              </div>
+
+              <div className="flex justify-between pt-2">
+                <div className="text-white font-nunitoSans">{props.artist}</div>
+                <div className="text-white font-nunitoSans">
+                  {props.nft[0].sold} of {props.nft[0].amount}
+                </div>
+              </div>
+
+              <div className="flex justify-between pt-5">
+                <div className="text-gray-300">Auction details</div>
+                <div className="text-gray-300">Highest bid</div>
+              </div>
+
+              <div className="flex justify-between pt-2">
+                <div className="w-2/5 text-sm text-white font-nunitoSans">
+                  Top 20 bidders get an exclusive access to the live premiere{' '}
+                  {props.nft[0].collectionName}.
+                </div>
+                <div className="text-white">{props.nft[0].highestBid}</div>
+              </div>
+
+              <div className="w-full h-[1px] bg-gray-500 mt-8"></div>
+            </div>
+          </div>
+        </>
+      )
+    } else {
+      return <></>
+    }
+  }
+
   return (
     <>
-      <div className="bg-raisenBlack py-10 md:py-40">
+      <div className="py-10 bg-raisenBlack md:py-40">
         {/* section 01 */}
-        <div className="max-w-screen-md mx-auto flex flex-col md:flex-row md:px-4">
+        <div className="flex flex-col max-w-screen-md mx-auto md:flex-row md:px-4">
           {/* cover */}
           <div className="md:w-1/2 md:order-2 md:ml-2">
             <div className="aspect-w-1 aspect-h-1">
               <img
-                className="object-center object-cover"
+                className="object-cover object-center"
                 src={
                   props.cover ||
                   'https://images.unsplash.com/photo-1562860149-691401a306f8?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80'
@@ -53,14 +109,14 @@ export const PreRelease = (props) => {
             </div>
           </div>
           {/* song info */}
-          <div className="ml-4 md:ml-0 mt-6 md:mt-0 md:w-1/2 md:order-1 md:mr-2 text-white font-montserrat text-xl">
+          <div className="mt-6 ml-4 text-xl text-white md:ml-0 md:mt-0 md:w-1/2 md:order-1 md:mr-2 font-montserrat">
             <div className="font-medium md:font-semibold md:text-5xl">
               {props.title || 'Untitled'}
             </div>
             <div className="text-gray-300 md:text-3xl md:text-white md:font-semibold md:mt-5">
               {props.artist || 'Unknown'}
             </div>
-            <div className="text-gray-300 text-base font-nunitoSans md:mt-5">
+            <div className="text-base text-gray-300 font-nunitoSans md:mt-5">
               © {props.label || 'Unlabelled'}
             </div>
           </div>
@@ -69,10 +125,12 @@ export const PreRelease = (props) => {
         {/* section 02 */}
         <div className="hidden md:block mx-auto max-w-[736px] h-[1px] bg-gray-300"></div>
 
+        {/* NFT section */ NFT()}
+
         {/* section 03 */}
-        <div className="max-w-screen-md mx-auto pt-10 flex flex-col md:flex-row items-center justify-between md:px-4">
-          <div className="text-white text-center md:text-left">
-            <div className="text-gray-300 font-medium">
+        <div className="flex flex-col items-center justify-between max-w-screen-md pt-10 mx-auto md:flex-row md:px-4">
+          <div className="text-center text-white md:text-left">
+            <div className="font-medium text-gray-300">
               Countdown to pre-release
             </div>
             <div className="mt-2 font-medium">
@@ -82,7 +140,7 @@ export const PreRelease = (props) => {
           {/* button */}
           <div
             onClick={handleSumbit}
-            className="bg-white p-2 px-4 mt-6 md:mt-0 rounded-md font-medium cursor-pointer"
+            className="p-2 px-4 mt-6 font-medium bg-white rounded-md cursor-pointer md:mt-0"
           >
             Buy your ticket now {props.price || '$0.00'}
           </div>

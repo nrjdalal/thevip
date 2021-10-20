@@ -12,8 +12,6 @@ export async function getServerSideProps(context) {
   const res = await fetch(query)
   const data = await res.json()
 
-  console.log(data)
-
   return {
     props: { data },
   }
@@ -22,7 +20,7 @@ export async function getServerSideProps(context) {
 const Index = ({ data }) => {
   const router = useRouter()
 
-  let title, artist, label, cover, price
+  let title, artist, label, cover, price, NFT
 
   // getting artist data
   data = data[0]
@@ -66,6 +64,12 @@ const Index = ({ data }) => {
   cover = `https://api.thevip.io${pre_release.cover.url}`
   price = `${pre_release.currency} ${pre_release.price}`
 
+  if (pre_release.NFTcollection.length !== 0) {
+    NFT = pre_release.NFTcollection
+  } else {
+    NFT = 'false'
+  }
+
   const renderer = ({ days, hours, minutes }) => {
     return (
       <>
@@ -84,6 +88,7 @@ const Index = ({ data }) => {
         countdown={<Countdown date={pre_release.dateEnd} renderer={renderer} />}
         price={price}
         data={pre_release}
+        nft={NFT}
       />
     </>
   )
