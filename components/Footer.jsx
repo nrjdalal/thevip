@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link'
 
 const Footer = () => {
   return (
@@ -7,7 +8,11 @@ const Footer = () => {
         <div className="max-w-screen-md py-10 mx-auto ">
           {/* logo */}
           <div className="flex justify-center">
-            <img className="w-24" src="/kloov_logo.svg" alt="" />
+            <Link href="/">
+              <a>
+                <img className="w-24" src="/kloov_logo.svg" alt="" />
+              </a>
+            </Link>
           </div>
           {/* links */}
           <div className="flex justify-between pt-10 text-xs text-white w-72 md:w-80 md:text-sm font-nunitoSans">
