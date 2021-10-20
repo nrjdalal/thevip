@@ -41,6 +41,22 @@ export const PreRelease = (props) => {
         <>
           <div className="flex flex-col items-center max-w-screen-md px-4 pt-12 mx-auto md:flex-row md:items-start">
             <div className="flex flex-col items-center md:w-1/3">
+              <div className="flex justify-center w-full font-medium text-white md:hidden font-montserrat">
+                {props.nft[0].collectionName}
+              </div>
+
+              <div className="flex justify-between w-full pt-5 md:hidden">
+                <div className="text-gray-300">Created by</div>
+                <div className="text-gray-300">Editions</div>
+              </div>
+
+              <div className="flex justify-between w-full pt-2 pb-8 md:hidden">
+                <div className="text-white font-nunitoSans">{props.artist}</div>
+                <div className="text-white font-nunitoSans">
+                  {props.nft[0].sold} of {props.nft[0].amount}
+                </div>
+              </div>
+
               <img
                 className="w-4/5 md:w-full"
                 src={'https://api.thevip.io' + props.nft[0].NFTimage.url}
@@ -50,17 +66,17 @@ export const PreRelease = (props) => {
                 {props.nft[0].description}
               </div>
             </div>
-            <div className="pl-20 md:w-2/3">
-              <div className="font-medium text-white font-montserrat ">
+            <div className="w-full md:pl-20 md:w-2/3 ">
+              <div className="hidden font-medium text-white md:flex font-montserrat ">
                 {props.nft[0].collectionName}
               </div>
 
-              <div className="flex justify-between pt-5">
+              <div className="justify-between hidden pt-5 md:flex">
                 <div className="text-gray-300">Created by</div>
                 <div className="text-gray-300">Editions</div>
               </div>
 
-              <div className="flex justify-between pt-2">
+              <div className="justify-between hidden pt-2 md:flex">
                 <div className="text-white font-nunitoSans">{props.artist}</div>
                 <div className="text-white font-nunitoSans">
                   {props.nft[0].sold} of {props.nft[0].amount}
@@ -77,7 +93,9 @@ export const PreRelease = (props) => {
                   Top 20 bidders get an exclusive access to the live premiere{' '}
                   {props.nft[0].collectionName}.
                 </div>
-                <div className="text-white">{props.nft[0].highestBid}</div>
+                <div className="text-white font-nunitoSans">
+                  {props.nft[0].highestBid}
+                </div>
               </div>
 
               <div className="w-full h-[1px] bg-gray-500 mt-8"></div>
