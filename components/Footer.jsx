@@ -7,7 +7,7 @@ const Footer = () => {
         <div className="max-w-screen-md py-10 mx-auto ">
           {/* logo */}
           <div className="flex justify-center">
-            <img className="w-20" src="/kloov_logo.svg" alt="" />
+            <img className="w-24" src="/kloov_logo.svg" alt="" />
           </div>
           {/* links */}
           <div className="flex justify-between pt-10 text-xs text-white w-72 md:w-80 md:text-sm font-nunitoSans">
