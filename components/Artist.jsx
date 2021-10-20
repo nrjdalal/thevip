@@ -99,6 +99,32 @@ export const PreRelease = (props) => {
               </div>
 
               <div className="w-full h-[1px] bg-gray-500 mt-8"></div>
+
+              <div className="flex justify-center pt-6 text-[#8bcfd4] font-montserrat">
+                Auction ends in
+              </div>
+
+              <div className="flex justify-center pt-4 text-white font-nunitoSans">
+                {props.countdown}
+              </div>
+
+              <div className="flex flex-col items-center justify-center pt-8 md:flex-row">
+                <input
+                  className="w-2/3 md:w-1/2 md:mr-1 bg-transparent rounded-md border-[#8bcfd4]"
+                  type="text"
+                />
+                <button className="w-2/3 mt-2 md:mt-0 h-10 md:w-1/2 bg-[#8bcfd4] rounded-md md:ml-1">
+                  Place bid
+                </button>
+              </div>
+
+              <div className="flex justify-center pt-4 text-sm text-gray-500">
+                <div className="w-2/3 md:w-full">Your balance: $450</div>
+              </div>
+
+              <div className="flex justify-center pt-2 text-sm text-[#8bcfd4] underline">
+                <div className="w-2/3 md:w-full">Add funds</div>
+              </div>
             </div>
           </div>
         </>
