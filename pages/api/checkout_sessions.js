@@ -20,6 +20,8 @@ export default async function handler(req, res) {
         body: JSON.stringify(data),
       })
 
+      console.log(req.body.router)
+
       const session = await stripe.checkout.sessions.create({
         line_items: [
           {
@@ -30,7 +32,7 @@ export default async function handler(req, res) {
         payment_method_types: ['card'],
         mode: 'payment',
         success_url: `${req.headers.origin}/api/verifier?slug=${data.slug}&token=${token}&referrer=stripe`,
-        cancel_url: `${req.headers.origin}`,
+        cancel_url: `${req.headers.origin}${req.body.router.fail}`,
         metadata: data,
       })
 

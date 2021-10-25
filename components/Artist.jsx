@@ -169,8 +169,6 @@ export const PreRelease = (props) => {
         {/* section 02 */}
         <div className="hidden md:block mx-auto max-w-[736px] h-[1px] bg-gray-300"></div>
 
-        {/* NFT section */ NFT()}
-
         {/* section 03 */}
         <div className="flex flex-col items-center justify-between max-w-screen-md pt-10 mx-auto md:flex-row md:px-4">
           <div className="text-center text-white md:text-left">
@@ -189,6 +187,8 @@ export const PreRelease = (props) => {
             Buy your ticket now {props.price || '$0.00'}
           </div>
         </div>
+
+        {/* NFT section */ NFT()}
       </div>
     </>
   )
